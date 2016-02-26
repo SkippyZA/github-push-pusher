@@ -1,0 +1,23 @@
+{
+  "name": "github-push-pusher",
+  "author": "Steven Inskip <inskips@gmail.com>",
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "",
+
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+
+  "dependencies": {
+    "body-parser": "~1.14.1",
+    "bunyan": "~1.5.1",
+    "bunyan-tcp": "~0.9.3",
+    "express": "~4.13.3",
+    "moment": "^2.11.2",
+    "ramda": "^0.19.1",
+    "request": "~2.69.0",
+    "rx": "^4.0.8"
+  }
+}
