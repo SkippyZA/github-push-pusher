@@ -22,7 +22,7 @@ let githubHeaders = R.pick(['x-github-event', 'x-github-delivery']);
 // req => boolean
 let isPushEvent = R.compose(R.propEq('x-github-event', 'push'), githubHeaders, R.prop('headers'));
 // url, options => observable result of post
-let postRequestObservable = R.curryN(2, (url, options) => rx.Observable.fromNodeCallback(request.post)(url, options));
+let postRequestObservable = R.curry((url, options) => rx.Observable.fromNodeCallback(request.post)(url, options));
 // options => observable of post
 let sendToLogstash = postRequestObservable(config.LOGSTASH_ENDPOINT);
 // Fixes repository dates for repository
