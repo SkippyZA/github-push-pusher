@@ -41,9 +41,11 @@ let evolveDatesToIso = R.evolve({
  * timestamps.
  */
 app.post('/github/events', (req, res) => {
+  console.log('Received request');
   rx.Observable.just(req)
     // We only care about push events
     .filter(isPushEvent)
+    .doOnNext(() => console.log('Event is push event'))
     // Take the headers and body from the original request and patch them for logstash
     .map(R.pick(['headers', 'body']))
     .map(R.evolve({
@@ -52,7 +54,9 @@ app.post('/github/events', (req, res) => {
     }))
     .map(renameKeys({ body: 'json' }))
     // Send the log off to logstash
+    .doOnNext(() => console.log('Sending to logstash'))
     .flatMap(sendToLogstash)
+    .doOnNext(() => console.log('Request to logstash complete'))
     .subscribe(() => res.send('OK!'), (err) => res.status(400).send(err.message), () => {});
 });
 
